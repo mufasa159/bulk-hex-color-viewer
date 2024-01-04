@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk HEX Color Viewer</title>
+
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="info">
+            <h2>Bulk HEX Color Viewer</h2>
+            <a href="https://github.com/mufasa159">@mufasa159</a>
+        </div>
+        <textarea type="text" id="color" placeholder="Enter hex color codes. Separate them by comma or line breaks. Make sure to start each code with #."></textarea>
+        <div id="color-viewer"></div>
+    </div>
+    <script>
+        const color_viewer = document.getElementById('color-viewer');
+        const color = document.getElementById('color');
+
+        function handleInputChange(event) {
+            color_viewer.innerHTML = '';
+            const value = event.target.value;
+            const values = value.split(/,|\n/);
+            for (let i = 0; i < values.length; i++) {
+
+                if (values[i] === '' || values[i].trim() === '') continue;
+
+                const div = document.createElement('div');
+                div.setAttribute('class', 'color-box');
+                div.style.backgroundColor = values[i];
+
+                const text = document.createElement('p');
+                text.setAttribute('class', 'color-box-text');
+                text.innerText = values[i];
+
+                div.appendChild(text);
+                color_viewer.appendChild(div);
+            }
+        }
+        color.addEventListener('input', handleInputChange);
+    </script>
+</body>
+</html>
